@@ -18,6 +18,11 @@
   "bugs": {
     "url": "https://github.com/gufao/questao6-back/issues"
   },
+  "husky": {
+    "hooks": {
+      "pre-commit": "pretty-quick --staged"
+    }
+  },
   "homepage": "https://github.com/gufao/questao6-back#readme",
   "devDependencies": {
     "@types/express": "^4.17.8",
