@@ -1,10 +1,12 @@
 import express, { Application, Request, Response } from 'express';
 import crypto from 'crypto';
+import cors from 'cors';
 
 // Boot express
 const app: Application = express();
 const port = process.env.PORT || '5000';
 // Application routing
+app.use(cors());
 app.use(express.json());
 app.get('/', (request: Request, response: Response) => response.status(200).json({ message: 'Hello' }));
 
@@ -24,20 +26,20 @@ app.post('/encrypt', (request: Request, response: Response) => {
 
   const inputEncrypted = cipher.read();
 
-  const decipher = crypto.createDecipheriv('aes-128-gcm', key, iv);
-  decipher.setAuthTag(cipherTag);
-  // decipher.setAAD(iv);
+  // const decipher = crypto.createDecipheriv('aes-128-gcm', key, iv);
+  // decipher.setAuthTag(cipherTag);
+  // // decipher.setAAD(iv);
 
-  decipher.write(inputEncrypted);
-  decipher.end();
+  // decipher.write(inputEncrypted);
+  // decipher.end();
 
-  const magic = decipher.read();
+  // const magic = decipher.read();
 
-  let match = false;
+  // let match = false;
 
-  if (magic.toString('utf-8') === texto) {
-    match = true;
-  }
+  // if (magic.toString('utf-8') === texto) {
+  //   match = true;
+  // }
 
   return response.status(200).json({
     password,
@@ -46,8 +48,8 @@ app.post('/encrypt', (request: Request, response: Response) => {
     keyHex: key.toString('hex'),
     iv,
     encrypted: inputEncrypted.toString('hex'),
-    decrypted: magic.toString('utf-8'),
-    match,
+    // decrypted: magic.toString('utf-8'),
+    // match,
   });
 });
 
