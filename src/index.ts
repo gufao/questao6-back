@@ -30,21 +30,6 @@ app.post('/encrypt', (request: Request, response: Response) => {
 
   const inputEncrypted = cipher.read();
 
-  // const decipher = crypto.createDecipheriv('aes-128-gcm', key, iv);
-  // decipher.setAuthTag(cipherTag);
-  // // decipher.setAAD(iv);
-
-  // decipher.write(inputEncrypted);
-  // decipher.end();
-
-  // const magic = decipher.read();
-
-  // let match = false;
-
-  // if (magic.toString('utf-8') === texto) {
-  //   match = true;
-  // }
-
   return response.status(200).json({
     password,
     salt,
@@ -52,8 +37,6 @@ app.post('/encrypt', (request: Request, response: Response) => {
     keyHex: key.toString('hex'),
     iv,
     encrypted: inputEncrypted.toString('hex'),
-    // decrypted: magic.toString('utf-8'),
-    // match,
   });
 });
 
