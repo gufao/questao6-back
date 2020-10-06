@@ -6,8 +6,10 @@ import cors from 'cors';
 const app: Application = express();
 const port = process.env.PORT || '5000';
 // Application routing
-app.use(cors());
+
 app.use(express.json());
+app.use(cors());
+
 app.get('/', (request: Request, response: Response) => response.status(200).json({ message: 'Hello' }));
 
 app.post('/encrypt', (request: Request, response: Response) => {
