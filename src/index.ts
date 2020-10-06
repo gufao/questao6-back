@@ -10,7 +10,9 @@ const port = process.env.PORT || '5000';
 app.use(express.json());
 app.use(cors());
 
-app.get('/', (request: Request, response: Response) => response.status(200).json({ message: 'Hello' }));
+app.get('/', (request: Request, response: Response) =>
+  response.status(200).json({ message: 'App Questão 6 - Augusto Linhares e Dayana Linhares' })
+);
 
 app.post('/encrypt', (request: Request, response: Response) => {
   const { texto } = request.body;
