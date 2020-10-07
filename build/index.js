@@ -12,8 +12,8 @@ var cors_1 = __importDefault(require('cors'));
 var app = express_1.default();
 var port = process.env.PORT || '5000';
 // Application routing
-app.use(express_1.default.json());
 app.use(cors_1.default());
+app.use(express_1.default.json());
 app.get('/', function (request, response) {
   return response.status(200).json({ message: 'App Questão 6 - Augusto Linhares e Dayana Linhares' });
 });

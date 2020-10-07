@@ -7,8 +7,8 @@ const app: Application = express();
 const port = process.env.PORT || '5000';
 // Application routing
 
-app.use(express.json());
 app.use(cors());
+app.use(express.json());
 
 app.get('/', (request: Request, response: Response) =>
   response.status(200).json({ message: 'App Questão 6 - Augusto Linhares e Dayana Linhares' })
