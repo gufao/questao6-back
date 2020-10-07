@@ -7,13 +7,15 @@ var __importDefault =
 Object.defineProperty(exports, '__esModule', { value: true });
 var express_1 = __importDefault(require('express'));
 var crypto_1 = __importDefault(require('crypto'));
+var cors_1 = __importDefault(require('cors'));
 // Boot express
 var app = express_1.default();
 var port = process.env.PORT || '5000';
 // Application routing
 app.use(express_1.default.json());
+app.use(cors_1.default());
 app.get('/', function (request, response) {
-  return response.status(200).json({ message: 'Hello' });
+  return response.status(200).json({ message: 'App Questão 6 - Augusto Linhares e Dayana Linhares' });
 });
 app.post('/encrypt', function (request, response) {
   var texto = request.body.texto;
@@ -26,16 +28,6 @@ app.post('/encrypt', function (request, response) {
   cipher.end();
   var cipherTag = cipher.getAuthTag();
   var inputEncrypted = cipher.read();
-  var decipher = crypto_1.default.createDecipheriv('aes-128-gcm', key, iv);
-  decipher.setAuthTag(cipherTag);
-  // decipher.setAAD(iv);
-  decipher.write(inputEncrypted);
-  decipher.end();
-  var magic = decipher.read();
-  var match = false;
-  if (magic.toString('utf-8') === texto) {
-    match = true;
-  }
   return response.status(200).json({
     password: password,
     salt: salt,
@@ -43,8 +35,6 @@ app.post('/encrypt', function (request, response) {
     keyHex: key.toString('hex'),
     iv: iv,
     encrypted: inputEncrypted.toString('hex'),
-    decrypted: magic.toString('utf-8'),
-    match: match,
   });
 });
 app.post('/decrypt', function (request, response) {
@@ -53,6 +43,11 @@ app.post('/decrypt', function (request, response) {
     keyHex = _a.keyHex,
     iv = _a.iv,
     encrypted = _a.encrypted;
+  if (!cipherTagHex || !keyHex || iv || encrypted) {
+    return response.status(200).json({
+      error: 'Não foi possível decifrar o texto. Verifique os dados inseridos',
+    });
+  }
   var decipher = crypto_1.default.createDecipheriv('aes-128-gcm', Buffer.from(keyHex, 'hex'), iv);
   decipher.setAuthTag(Buffer.from(cipherTagHex, 'hex'));
   decipher.write(Buffer.from(encrypted, 'hex'));

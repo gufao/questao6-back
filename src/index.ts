@@ -43,6 +43,12 @@ app.post('/encrypt', (request: Request, response: Response) => {
 app.post('/decrypt', (request: Request, response: Response) => {
   const { cipherTagHex, keyHex, iv, encrypted } = request.body;
 
+  if (!cipherTagHex || !keyHex || iv || encrypted) {
+    return response.status(200).json({
+      error: 'Não foi possível decifrar o texto. Verifique os dados inseridos',
+    });
+  }
+
   const decipher = crypto.createDecipheriv('aes-128-gcm', Buffer.from(keyHex, 'hex'), iv);
   decipher.setAuthTag(Buffer.from(cipherTagHex, 'hex'));
 
