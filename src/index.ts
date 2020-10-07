@@ -11,7 +11,9 @@ app.use(cors());
 app.use(express.json());
 
 app.get('/', (request: Request, response: Response) =>
-  response.status(200).json({ message: 'App Questão 6 - Augusto Linhares e Dayana Linhares' })
+  response.status(200).json({
+    message: 'App Questão 6 - Augusto Linhares e Dayana Linhares',
+  })
 );
 
 app.post('/encrypt', (request: Request, response: Response) => {
