@@ -17,6 +17,10 @@ app.get('/', (request: Request, response: Response) =>
 app.post('/encrypt', (request: Request, response: Response) => {
   const { texto } = request.body;
 
+  if (!texto) {
+    return response.status(200).json({ error: 'Sem texto para encriptar' });
+  }
+
   const password = crypto.randomBytes(16).toString('hex');
   const salt = crypto.randomBytes(16).toString('hex');
   const key = crypto.pbkdf2Sync(password, salt, 10000, 16, 'sha256');

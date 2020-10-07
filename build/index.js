@@ -19,6 +19,9 @@ app.get('/', function (request, response) {
 });
 app.post('/encrypt', function (request, response) {
   var texto = request.body.texto;
+  if (!texto) {
+    return response.status(200).json({ error: 'Sem texto para encriptar' });
+  }
   var password = crypto_1.default.randomBytes(16).toString('hex');
   var salt = crypto_1.default.randomBytes(16).toString('hex');
   var key = crypto_1.default.pbkdf2Sync(password, salt, 10000, 16, 'sha256');
