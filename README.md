@@ -1,6 +1,6 @@
 # Questao 6 Back Tutorial
 
-Caso não tenha instalado é necessario o NodeJS para rodar.
+Caso não tenha instalado é necessário o NodeJS para rodar.
 Baixar em: https://nodejs.org/en/download/
 
 após a instalação do node, extrair a pasta zipada e navegar no terminal/prompt até o local onde estão os arquivos.
