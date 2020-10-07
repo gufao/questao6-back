@@ -1,4 +1,4 @@
-# Questao 6 Back Tutorial
+# Questão 6 Back Tutorial
 
 Caso não tenha instalado é necessário o NodeJS para rodar.
 Baixar em: https://nodejs.org/en/download/
